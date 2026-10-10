@@ -23,7 +23,7 @@ def buscar_datos_sync(nombres: str, apellido_paterno: str, apellido_materno: str
 
         try:
             # --- PASO 1: Buscar DNI por nombre ---
-            page.goto("https://dniperu.com/buscar-dni-por-nombre/", timeout=30000)
+            page.goto("https://dniperu.com/buscar-dni-por-nombre/", timeout=30000, wait_until="domcontentloaded")
             page.fill("input[name=nombres]", nombres)
             page.fill("input[name=apellido_paterno]", apellido_paterno)
             page.fill("input[name=apellido_materno]", apellido_materno)
@@ -45,7 +45,7 @@ def buscar_datos_sync(nombres: str, apellido_paterno: str, apellido_materno: str
                 return None, None, "No se encontró ningún DNI para esos nombres y apellidos en la base pública."
 
             # --- PASO 2: Buscar Fecha de Nacimiento por DNI ---
-            page.goto("https://dniperu.com/fecha-de-nacimiento-con-dni/", timeout=30000)
+            page.goto("https://dniperu.com/fecha-de-nacimiento-con-dni/", timeout=30000, wait_until="domcontentloaded")
             page.fill("input[name=dni]", dni)
             page.click("button[type=submit]")
             page.wait_for_timeout(4000)
