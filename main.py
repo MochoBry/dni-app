@@ -27,7 +27,7 @@ def buscar_datos_sync(nombres: str, apellido_paterno: str, apellido_materno: str
             page.fill("input[name=nombres]", nombres)
             page.fill("input[name=apellido_paterno]", apellido_paterno)
             page.fill("input[name=apellido_materno]", apellido_materno)
-            page.click("button[type=submit]")
+            page.evaluate("document.querySelector('button[type=submit]').click()")
             page.wait_for_timeout(4000)
 
             text1 = page.evaluate("document.body.innerText")
@@ -47,7 +47,7 @@ def buscar_datos_sync(nombres: str, apellido_paterno: str, apellido_materno: str
             # --- PASO 2: Buscar Fecha de Nacimiento por DNI ---
             page.goto("https://dniperu.com/fecha-de-nacimiento-con-dni/", timeout=30000, wait_until="domcontentloaded")
             page.fill("input[name=dni]", dni)
-            page.click("button[type=submit]")
+            page.evaluate("document.querySelector('button[type=submit]').click()")
             page.wait_for_timeout(4000)
 
             text2 = page.evaluate("document.body.innerText")
